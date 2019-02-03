@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_filter"
+        android:icon="@drawable/ic_color_lens_white_24dp"
+        android:title="@string/title_filter" />
+
+    <item
+        android:id="@+id/navigation_crop"
+        android:icon="@drawable/ic_crop_white_24dp"
+        android:title="@string/title_crop_off" />
+
+    <item
+        android:id="@+id/navigation_border"
+        android:icon="@drawable/ic_border_color_white_24dp"
+        android:title="@string/title_border_off" />
+
+    <item
+        android:id="@+id/navigation_save"
+        android:icon="@drawable/ic_save_white_24dp"
+        android:title="@string/title_save"/>
+
+</menu>

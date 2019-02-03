@@ -1,0 +1,55 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame_layout">
+
+
+    <com.gravedoll.colorclipcamera.CameraView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|bottom"
+        android:background="@color/background_menu"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imageButtonShutter"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/abc_action_bar_icon_vertical_padding_material"
+            android:paddingRight="@dimen/abc_action_bar_icon_vertical_padding_material"
+            android:src="@drawable/ic_camera_white_48dp" />
+
+        <ImageButton
+            android:id="@+id/imageButtonHsv"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/abc_action_bar_icon_vertical_padding_material"
+            android:paddingTop="@dimen/abc_action_bar_icon_vertical_padding_material"
+            android:paddingRight="@dimen/abc_action_bar_icon_vertical_padding_material"
+            android:paddingBottom="@dimen/abc_action_bar_icon_vertical_padding_material"
+            android:src="@drawable/ic_tune_white_48dp" />
+    </LinearLayout>
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonAbout"
+        android:src="@drawable/ic_info_outline_white_24dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_gravity="left|top" />
+
+
+</FrameLayout>
