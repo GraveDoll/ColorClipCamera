@@ -1,5 +1,6 @@
 package com.gravedoll.colorclipcamera;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -9,8 +10,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -65,8 +69,8 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     private int maxS; //= 255;
     private int maxV; //= 255;
 
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     private Mat mRgba;
     private Scalar mBlobColorRgba;
@@ -80,7 +84,8 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     private OrientationEventListener orientationListener;
     private static double mMinContourArea = 0.99;
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
-    SimpleProgressDialogFragment progressDialog = null;    // ロード中画面のプログレスダイアログ作成
+    private SimpleProgressDialogFragment progressDialog = null;    // ロード中画面のプログレスダイアログ作成
+    private static int REQUEST_CODE = 1000;
 
 
 //    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -113,6 +118,21 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         Log.i(TAG, "called onCreate");
         super.onCreate(savedInstanceState);
 
+        ArrayList<String> permissions = new ArrayList<String>();
+        //Runtime Permission
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.CAMERA);
+            }
+            if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
+            ActivityCompat.requestPermissions(
+                    this,
+                    permissions.toArray(new String[permissions.size()]),
+                    REQUEST_CODE);
+        }
+        
         // 外部ストレージがない場合、メッセージを出して終了
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             Toast.makeText(this, "SDカードがありません", Toast.LENGTH_SHORT)
