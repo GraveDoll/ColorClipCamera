@@ -127,12 +127,14 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
             if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             }
-            ActivityCompat.requestPermissions(
-                    this,
-                    permissions.toArray(new String[permissions.size()]),
-                    REQUEST_CODE);
+            if(permissions != null && permissions.size() !=0) {
+                ActivityCompat.requestPermissions(
+                        this,
+                        permissions.toArray(new String[permissions.size()]),
+                        REQUEST_CODE);
+            }
         }
-        
+
         // 外部ストレージがない場合、メッセージを出して終了
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             Toast.makeText(this, "SDカードがありません", Toast.LENGTH_SHORT)
